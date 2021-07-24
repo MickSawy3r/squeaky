@@ -1,0 +1,9 @@
+include(
+    ":app",
+    ":common:cache",
+    ":common:network",
+    ":common:reactive",
+    ":common:extension",
+    ":common:platform",
+    ":authenticator"
+)
