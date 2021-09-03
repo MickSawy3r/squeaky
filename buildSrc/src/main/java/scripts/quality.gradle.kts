@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    lintOptions {
+    lint {
         isQuiet = true
         isAbortOnError = false
         isIgnoreWarnings = true
@@ -27,15 +27,14 @@ val jacocoReport by tasks.registering(JacocoReport::class) {
     dependsOn("test${Default.BUILD_VARIANT}UnitTest")
 
     val buildVariantClassPath = "${Default.BUILD_FLAVOR}${Default.BUILD_TYPE.capitalize()}"
-    val outputDir = "${project.buildDir}/testCoverage"
+    val outputDir = "$buildDir/testCoverage"
 
     reports {
         xml.isEnabled = true
         html.isEnabled = true
-        html.destination = file(outputDir)
     }
 
-    classDirectories.setFrom(fileTree(project.buildDir) {
+    classDirectories.setFrom(fileTree(buildDir) {
         include(
             "**/classes/**/main/**",
             "**/intermediates/classes/$buildVariantClassPath/**",
@@ -59,9 +58,9 @@ val jacocoReport by tasks.registering(JacocoReport::class) {
             "**/*Entity.*")
     }
     )
-    sourceDirectories.setFrom(fileTree(project.projectDir) {
+    sourceDirectories.setFrom(fileTree(projectDir) {
         include("src/main/java/**", "src/main/kotlin/**") })
-    executionData.setFrom(fileTree(project.buildDir) {
+    executionData.setFrom(fileTree(buildDir) {
         include("**/*.exec", "**/*.ec") })
 
     doLast { println("Code Coverage Report: $outputDir/index.html") }
@@ -79,10 +78,10 @@ val detektAll by tasks.registering(Detekt::class) {
     parallel = true
     buildUponDefaultConfig = true
 
-    val outputFile = "${project.buildDir}/staticAnalysis/index.html"
+    val outputFile = "$buildDir/staticAnalysis/index.html"
 
-    setSource(files(rootProject.projectDir))
-    config.setFrom("${project.rootDir}/config/detekt/detekt.yml")
+    setSource(files(projectDir))
+    config.setFrom("$rootDir/config/detekt/detekt.yml")
 
     include("**/*.kt")
     exclude("**/*.kts", "*/build/*", "/buildSrc")

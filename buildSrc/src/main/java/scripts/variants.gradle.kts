@@ -46,7 +46,7 @@ android {
             isDebuggable = true
         }
         getByName(BuildTypes.RELEASE) {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -55,7 +55,7 @@ android {
         }
     }
 
-    flavorDimensions(FlavorDimensions.DEFAULT)
+    flavorDimensions.add(FlavorDimensions.DEFAULT)
     productFlavors {
         create(ProductFlavors.DEV) {
             dimension = FlavorDimensions.DEFAULT

@@ -24,7 +24,7 @@ android {
         versionName = AndroidClient.versionName
         testInstrumentationRunner = AndroidClient.testRunner
 
-        buildConfigField("String", "SPOTIFY_BASE_URL", "\"https://api.spotify.com/v1/\"")
+        buildConfigField("String", "SPOTIFY_BASE_URL", "\"https://api.spotify.com/\"")
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -42,7 +42,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
 
@@ -53,8 +53,6 @@ dependencies {
     implementation(project(":common:platform"))
     implementation(project(":common:extension"))
     implementation(project(":authenticator"))
-
-    annotationProcessor(Libraries.roomAnnotationProcessor)
 
     // Compile time dependencies
     kapt(Libraries.lifecycleCompiler)

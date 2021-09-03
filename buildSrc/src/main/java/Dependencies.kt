@@ -18,13 +18,12 @@ object AndroidClient {
 
 object BuildPlugins {
     object Versions {
-        const val buildToolsVersion = "4.1.0"
-        const val gradleVersion = "6.7"
+        const val gradleVersion = "7.0.2"
         const val hilt = "2.37"
         const val realm = "10.6.0"
     }
 
-    const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.gradleVersion}"
     const val kotlinGradlePlugin =
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.standardLibrary}"
     const val realmGradlePlugin = "io.realm:realm-gradle-plugin:${Versions.realm}"
