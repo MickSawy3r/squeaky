@@ -1,23 +1,15 @@
 package com.sixbits.assessment.feature.search.datasource.network
 
-import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class ArtistDetailsResponse(
-    @Json(name = "external_urls")
-    val externalUrls: ExternalUrls = ExternalUrls(),
     val followers: Followers = Followers(),
     val genres: List<String> = listOf(),
-    val href: String = "",
     val id: String = "",
     val images: List<Image> = listOf(),
     val name: String = "",
-    val popularity: Int = 0,
-    val type: String = "",
-    val uri: String = ""
 ) {
-    data class ExternalUrls(
-        val spotify: String = ""
-    )
 
     data class Followers(
         val href: Any? = Any(),
