@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name="com.sixbits.assessment.feature.routing.presentation.RouterActivity"
+        <activity android:name="com.sixbits.assessment.core.navigation.RouterActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.Translucent">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.sixbits.assessment.feature.routing.presentation
+package com.sixbits.assessment.core.navigation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
