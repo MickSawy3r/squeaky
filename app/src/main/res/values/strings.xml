@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Spotify App</string>
-    <string name="com_spotify_sdk_redirect_scheme">ticketswap-spotify</string>
-    <string name="com_spotify_sdk_redirect_host">ticketswap-spotify</string>
+    <string name="com_spotify_sdk_redirect_scheme">sixbits-spotify</string>
+    <string name="com_spotify_sdk_redirect_host">sixbits-spotify</string>
 
     <string name="failure_network_connection">No Network Connection.</string>
     <string name="failure_server_error">Server Error</string>

@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ticketswap.platform">
+    package="com.sixbits.platform">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application>
-        <activity android:name=".core.ContainerActivity" />
+        <activity android:name="com.sixbits.platform.core.ContainerActivity" />
     </application>
 </manifest>

@@ -3,6 +3,6 @@
   <component name="DetektProjectConfiguration">
     <enableDetekt>true</enableDetekt>
     <enableFormatting>true</enableFormatting>
-    <configPaths>C:\Users\moham\AndroidStudioProjects\android-assessment\TicketSwapAssessment\ config\detekt\detekt.yaml</configPaths>
+    <configPaths>C:\Users\moham\AndroidStudioProjects\squeaky\config\detekt\detekt.yaml</configPaths>
   </component>
 </project>

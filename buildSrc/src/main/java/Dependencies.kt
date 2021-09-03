@@ -10,7 +10,7 @@ object AndroidSdk {
 }
 
 object AndroidClient {
-    const val appId = "com.ticketswap.assessment"
+    const val appId = "com.sixbits.assessment"
     const val versionCode = 1
     const val versionName = "1.0"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"

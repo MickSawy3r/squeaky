@@ -48,9 +48,7 @@ android {
 
 dependencies {
     // Modules and Projects
-    implementation(project(":common:cache"))
     implementation(project(":common:reactive"))
-    implementation(project(":common:network"))
     implementation(project(":common:extension"))
     implementation(project(":common:platform"))
     implementation(project(":common:extension"))
