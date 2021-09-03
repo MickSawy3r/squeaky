@@ -82,14 +82,14 @@ dependencies {
     implementation(Libraries.retrofit)
     implementation(Libraries.rxRetrofitAdapter)
     implementation(Libraries.moshiAdapter)
+    implementation(Libraries.moshiKotlin)
     implementation(Libraries.okHttp)
     implementation(Libraries.okHttpLoggingInterceptor)
     implementation(Libraries.rxAndroid)
     implementation(Libraries.rxJava)
     implementation(Libraries.lottie)
-
-    // Ktx
     implementation(Libraries.fragmentKtx)
+    implementation(Libraries.activityKtx)
 
     // Unit/Android tests dependencies
     testImplementation(TestLibraries.junit4)

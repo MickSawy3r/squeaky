@@ -10,6 +10,7 @@ interface ISpotifyApi {
     @GET("v1/search")
     fun searchSpotify(
         @Query("q") query: String,
+        @Query("type") type: String = "track,artist",
         @Header("Authorization") authToken: String
     ): Single<SearchResponse>
 

@@ -9,7 +9,10 @@ import javax.inject.Inject
 class SpotifyRemoteDataSource @Inject constructor(private val iSpotifyApi: ISpotifyApi) {
 
     fun search(query: String, authToken: String): Single<List<SpotifyDataModel>> {
-        return iSpotifyApi.searchSpotify(query, authToken).map {
+        return iSpotifyApi.searchSpotify(
+            query = query,
+            authToken = authToken
+        ).map {
             it.toDomainModel()
         }
     }

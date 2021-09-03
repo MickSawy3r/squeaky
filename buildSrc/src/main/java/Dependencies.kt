@@ -1,5 +1,5 @@
 object Kotlin {
-    const val standardLibrary = "1.4.10"
+    const val standardLibrary = "1.4.30"
     const val coroutines = "1.3.9"
 }
 
@@ -75,7 +75,9 @@ object Libraries {
 
     const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
 
-    const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+    const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
 
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomAnnotationProcessor = "androidx.room:room-compiler:${Versions.room}"

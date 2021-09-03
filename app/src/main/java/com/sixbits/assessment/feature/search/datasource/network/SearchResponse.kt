@@ -2,9 +2,6 @@
 
 package com.sixbits.assessment.feature.search.datasource.network
 
-import com.squareup.moshi.JsonClass
-
-@JsonClass(generateAdapter = true)
 data class SearchResponse(
     val artists: Artists = Artists(),
     val tracks: Tracks = Tracks()

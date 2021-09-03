@@ -1,8 +1,5 @@
 package com.sixbits.assessment.feature.search.datasource.network
 
-import com.squareup.moshi.JsonClass
-
-@JsonClass(generateAdapter = true)
 data class ArtistDetailsResponse(
     val followers: Followers = Followers(),
     val genres: List<String> = listOf(),

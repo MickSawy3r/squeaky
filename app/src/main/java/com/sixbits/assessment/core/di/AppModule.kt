@@ -4,6 +4,8 @@ import android.content.Context
 import com.sixbits.assessment.BuildConfig
 import com.sixbits.assessment.feature.search.datasource.network.ISpotifyApi
 import com.sixbits.authenticator.AuthGuard
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,10 +30,13 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
+        val moshi = Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
+            .build()
         return Retrofit.Builder()
             .baseUrl(BuildConfig.SPOTIFY_BASE_URL)
             .client(httpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
     }
@@ -42,7 +47,7 @@ class AppModule {
         val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
             val loggingInterceptor =
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             okHttpClientBuilder.addInterceptor(loggingInterceptor)
         }
         return okHttpClientBuilder.build()
