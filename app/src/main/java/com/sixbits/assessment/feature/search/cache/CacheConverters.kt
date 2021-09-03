@@ -24,14 +24,4 @@ class CacheConverters {
     fun toSearchItemType(ordinal: Int): SearchItemType {
         return SearchItemType.values()[ordinal]
     }
-
-    @TypeConverter
-    fun fromString(stringListString: String): List<String> {
-        return stringListString.split(",").map { it }
-    }
-
-    @TypeConverter
-    fun toString(stringList: List<String>): String {
-        return stringList.joinToString(separator = ",")
-    }
 }

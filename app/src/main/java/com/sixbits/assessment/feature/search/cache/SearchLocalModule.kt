@@ -8,11 +8,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class SearchLocalModule {
     @Provides
+    @Singleton
     fun provideCacheDatabase(@ApplicationContext context: Context): CacheDatabase {
         return Room
             .databaseBuilder(
@@ -24,11 +26,13 @@ class SearchLocalModule {
     }
 
     @Provides
+    @Singleton
     fun provideCacheDao(cacheDb: CacheDatabase): CacheDao {
         return cacheDb.cacheDao()
     }
 
     @Provides
+    @Singleton
     fun provideSearchCache(cacheDao: CacheDao): ISearchCache {
         return SearchCache(cacheDao)
     }

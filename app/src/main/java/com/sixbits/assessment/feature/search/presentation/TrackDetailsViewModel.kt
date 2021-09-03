@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sixbits.assessment.feature.search.domain.datamodel.TrackDetailsDataModel
+import com.sixbits.assessment.feature.search.domain.failures.UnauthorizedException
 import com.sixbits.assessment.feature.search.domain.usecase.LoadTrackDetailsUseCase
 import com.sixbits.extention.Failure
-import com.sixbits.network.UnauthorizedException
 import com.sixbits.platform.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.observers.DisposableSingleObserver

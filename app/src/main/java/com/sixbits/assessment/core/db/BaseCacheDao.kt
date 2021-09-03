@@ -1,4 +1,4 @@
-package com.sixbits.cache
+package com.sixbits.assessment.core.db
 
 import androidx.room.Delete
 import androidx.room.Insert

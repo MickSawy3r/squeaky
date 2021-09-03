@@ -2,8 +2,8 @@ package com.sixbits.assessment.feature.search.cache
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.sixbits.assessment.core.db.BaseCacheDao
 import com.sixbits.assessment.feature.search.datasource.local.CacheEntry
-import com.sixbits.cache.BaseCacheDao
 import io.reactivex.rxjava3.core.Single
 import java.util.Date
 

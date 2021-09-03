@@ -81,6 +81,8 @@ dependencies {
     implementation(Libraries.picasso)
     implementation(Libraries.hilt)
     implementation(Libraries.spotify)
+    implementation(Libraries.retrofit)
+    implementation(Libraries.rxRetrofitAdapter)
     implementation(Libraries.moshiAdapter)
     implementation(Libraries.okHttp)
     implementation(Libraries.okHttpLoggingInterceptor)
