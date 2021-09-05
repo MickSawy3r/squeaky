@@ -9,6 +9,4 @@ interface ISearchCache {
     fun saveCacheList(cacheEntry: List<CacheEntry>): Completable
 
     fun getCachedRequests(): Single<List<CacheEntry>>
-
-    fun getLastCachedRequest(): Single<CacheEntry>
 }
