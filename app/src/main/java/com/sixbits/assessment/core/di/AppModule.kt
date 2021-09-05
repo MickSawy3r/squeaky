@@ -2,7 +2,10 @@ package com.sixbits.assessment.core.di
 
 import android.content.Context
 import com.sixbits.assessment.BuildConfig
+import com.sixbits.assessment.feature.search.datasource.network.ArtistDetailsMapper
 import com.sixbits.assessment.feature.search.datasource.network.ISpotifyApi
+import com.sixbits.assessment.feature.search.datasource.network.SearchResponseMapper
+import com.sixbits.assessment.feature.search.datasource.network.TrackDetailsResponseMapper
 import com.sixbits.authenticator.AuthGuard
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -58,4 +61,16 @@ class AppModule {
     fun provideSpotifyApi(retrofit: Retrofit): ISpotifyApi {
         return retrofit.create(ISpotifyApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideSearchMapper(): SearchResponseMapper = SearchResponseMapper()
+
+    @Provides
+    @Singleton
+    fun provideArtistDetailsMapper(): ArtistDetailsMapper = ArtistDetailsMapper()
+
+    @Provides
+    @Singleton
+    fun provideTrackDetailsMapper(): TrackDetailsResponseMapper = TrackDetailsResponseMapper()
 }
