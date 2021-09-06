@@ -6,24 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.ViewModelProvider
-import com.spotify.sdk.android.auth.AuthorizationClient
-import com.spotify.sdk.android.auth.AuthorizationRequest
-import com.spotify.sdk.android.auth.AuthorizationResponse
+import androidx.fragment.app.viewModels
 import com.sixbits.assessment.R
 import com.sixbits.assessment.core.navigation.Navigator
 import com.sixbits.assessment.databinding.FragmentLoginBinding
 import com.sixbits.authenticator.AuthGuard
 import com.sixbits.platform.core.BaseFragment
+import com.spotify.sdk.android.auth.AuthorizationClient
+import com.spotify.sdk.android.auth.AuthorizationRequest
+import com.spotify.sdk.android.auth.AuthorizationResponse
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
-private const val TAG = "LoginFragment"
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels()
 
     @Inject
     lateinit var navigator: Navigator
@@ -33,18 +31,17 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var uiBinding: FragmentLoginBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        uiBinding =
-            FragmentLoginBinding.inflate(layoutInflater, container, false)
+        uiBinding = FragmentLoginBinding.inflate(
+            layoutInflater,
+            container,
+            false
+        )
+
         setupUI()
         setupListeners()
 
@@ -74,8 +71,7 @@ class LoginFragment : BaseFragment() {
                 .scheme(getString(R.string.com_spotify_sdk_redirect_scheme))
                 .authority(getString(R.string.com_spotify_sdk_redirect_host))
                 .build().toString()
-        )
-            .setShowDialog(true)
+        ).setShowDialog(true)
             .setScopes(arrayOf("user-read-email"))
             .setCampaign("your-campaign-token")
             .build()
@@ -84,10 +80,15 @@ class LoginFragment : BaseFragment() {
         getAuthToken.launch(intent)
     }
 
-    private val getAuthToken =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            val response = AuthorizationClient.getResponse(it.resultCode, it.data)
+    private val getAuthToken = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        val response = AuthorizationClient.getResponse(it.resultCode, it.data)
 
-            loginViewModel.loginUser(response)
-        }
+        loginViewModel.loginUser(response)
+    }
+
+    companion object {
+        private const val TAG = "LoginFragment"
+    }
 }
