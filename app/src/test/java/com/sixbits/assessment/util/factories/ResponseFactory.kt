@@ -19,8 +19,6 @@ object ResponseFactory {
                 SearchResponse.Artists.Item(
                     id = String.format("%02d", i),
                     name = "Artist ${String.format("%02d", i)}",
-                    type = "artist",
-                    popularity = 123,
                     images = listOf(
                         SearchResponse.Artists.Item.Image(
                             url = "https://google.com"
@@ -35,7 +33,6 @@ object ResponseFactory {
             tracks.add(
                 SearchResponse.Tracks.Item(
                     id = String.format("%02d", i),
-                    type = "track",
                     name = "Track ${String.format("%02d", i)}",
                     album = SearchResponse.Tracks.Item.Album(
                         images = listOf(

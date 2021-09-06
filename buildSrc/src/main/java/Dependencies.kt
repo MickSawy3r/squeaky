@@ -148,6 +148,7 @@ object TestLibraries {
         const val okHttp = "4.9.0"
         const val coreTesting = "2.1.0"
         const val fragmentTesting = "1.3.5"
+        const val coreKtx = "1.4.0"
     }
 
     const val coreTesting = "androidx.arch.core:core-testing:${Versions.coreTesting}"
@@ -171,6 +172,7 @@ object TestLibraries {
     const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
     const val okHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
     const val fragmentTesting = "androidx.fragment:fragment-testing:${Versions.fragmentTesting}"
+    const val coreTestKtx = "androidx.test:core-ktx:${Versions.coreKtx}"
 }
 
 object RuntimeLibraries {

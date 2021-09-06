@@ -2,7 +2,7 @@ package com.sixbits.assessment.core.di
 
 import android.content.Context
 import com.sixbits.assessment.BuildConfig
-import com.sixbits.assessment.feature.search.datasource.network.ArtistDetailsMapper
+import com.sixbits.assessment.feature.search.datasource.network.ArtistDetailsResponseMapper
 import com.sixbits.assessment.feature.search.datasource.network.ISpotifyApi
 import com.sixbits.assessment.feature.search.datasource.network.SearchResponseMapper
 import com.sixbits.assessment.feature.search.datasource.network.TrackDetailsResponseMapper
@@ -68,7 +68,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideArtistDetailsMapper(): ArtistDetailsMapper = ArtistDetailsMapper()
+    fun provideArtistDetailsMapper(): ArtistDetailsResponseMapper = ArtistDetailsResponseMapper()
 
     @Provides
     @Singleton

@@ -1,4 +1,4 @@
-package com.sixbits.assessment.feature
+package com.sixbits.assessment.feature.search.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.sixbits.assessment.feature.search.domain.usecase.GetLastSearchUseCase

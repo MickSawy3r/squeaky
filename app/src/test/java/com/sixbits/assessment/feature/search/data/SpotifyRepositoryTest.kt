@@ -1,4 +1,4 @@
-package com.sixbits.assessment.feature
+package com.sixbits.assessment.feature.search.data
 
 import com.sixbits.assessment.feature.search.data.SpotifyRepository
 import com.sixbits.assessment.feature.search.datasource.local.SearchLocalDataSource

@@ -1,11 +1,10 @@
-package com.sixbits.assessment.feature
+package com.sixbits.assessment.feature.search.datasource.network
 
-import com.sixbits.assessment.feature.search.datasource.network.ISpotifyApi
-import com.sixbits.assessment.feature.search.datasource.network.SpotifyRemoteDataSource
 import com.sixbits.assessment.feature.search.domain.datamodel.SearchItemType
 import com.sixbits.assessment.util.factories.ResponseFactory
 import com.sixbits.extention.Failure
 import io.reactivex.rxjava3.core.Single
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
@@ -18,10 +17,22 @@ import org.mockito.junit.MockitoJUnitRunner
  */
 
 @RunWith(MockitoJUnitRunner::class)
-class SpotifyRemoteDataModelTest {
+class SpotifyRemoteDataSourceTest {
 
     @Mock
     lateinit var spotifyApi: ISpotifyApi
+
+    private lateinit var spotifyRemoteDataSource: SpotifyRemoteDataSource
+
+    @Before
+    fun setup() {
+        spotifyRemoteDataSource = SpotifyRemoteDataSource(
+            iSpotifyApi = spotifyApi,
+            artistDetailsResponseMapper = ArtistDetailsResponseMapper(),
+            trackDetailsResponseMapper = TrackDetailsResponseMapper(),
+            searchListMapper = SearchResponseMapper()
+        )
+    }
 
     @Test
     fun testSearch_shouldSuccess() {
@@ -29,12 +40,16 @@ class SpotifyRemoteDataModelTest {
             artistLength = 3,
             trackLength = 2
         )
-        val spotifyRemoteDataSource = SpotifyRemoteDataSource(spotifyApi)
 
-        `when`(spotifyApi.searchSpotify(anyString(), anyString()))
-            .thenReturn(
-                Single.just(mockResponse)
+        `when`(
+            spotifyApi.searchSpotify(
+                anyString(),
+                anyString(),
+                anyString()
             )
+        ).thenReturn(
+            Single.just(mockResponse)
+        )
 
         // Given I request a search query
         val response = spotifyRemoteDataSource.search("Query", "Token").test()
@@ -68,9 +83,7 @@ class SpotifyRemoteDataModelTest {
 
     @Test
     fun testSearch_shouldFailWithUnauthorizedException() {
-        val spotifyRemoteDataSource = SpotifyRemoteDataSource(spotifyApi)
-
-        `when`(spotifyApi.searchSpotify(anyString(), anyString()))
+        `when`(spotifyApi.searchSpotify(anyString(), anyString(), anyString()))
             .thenReturn(
                 Single.error(Failure.UnauthorizedError)
             )
@@ -93,7 +106,7 @@ class SpotifyRemoteDataModelTest {
             .thenReturn(Single.just(mockResponse))
 
         // When I get the response
-        val response = SpotifyRemoteDataSource(spotifyApi).getArtistDetails(
+        val response = spotifyRemoteDataSource.getArtistDetails(
             id = id, authToken = "token"
         ).test()
 
@@ -120,7 +133,7 @@ class SpotifyRemoteDataModelTest {
             .thenReturn(Single.just(mockResponse))
 
         // When I get the response
-        val response = SpotifyRemoteDataSource(spotifyApi).getTrackDetails(
+        val response = spotifyRemoteDataSource.getTrackDetails(
             id = id, authToken = "token"
         ).test()
 

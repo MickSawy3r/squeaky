@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SpotifyRemoteDataSource @Inject constructor(
     private val iSpotifyApi: ISpotifyApi,
-    private val artistDetailsMapper: ArtistDetailsMapper,
+    private val artistDetailsResponseMapper: ArtistDetailsResponseMapper,
     private val searchListMapper: SearchResponseMapper,
     private val trackDetailsResponseMapper: TrackDetailsResponseMapper
 ) {
@@ -24,7 +24,7 @@ class SpotifyRemoteDataSource @Inject constructor(
         return iSpotifyApi.getArtistDetails(
             id = id,
             authToken = authToken
-        ).map(artistDetailsMapper::map)
+        ).map(artistDetailsResponseMapper::map)
     }
 
     fun getTrackDetails(id: String, authToken: String): Single<TrackDetailsDataModel> {

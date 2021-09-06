@@ -1,4 +1,4 @@
-package com.sixbits.assessment.feature
+package com.sixbits.assessment.feature.search.domain.usecase
 
 import com.sixbits.assessment.feature.search.data.SpotifyRepository
 import com.sixbits.assessment.feature.search.domain.usecase.GetLastSearchUseCase

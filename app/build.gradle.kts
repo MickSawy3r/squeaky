@@ -44,6 +44,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    testOptions.unitTests.isIncludeAndroidResources = true
+    testOptions.unitTests.isReturnDefaultValues = true
 }
 
 dependencies {
@@ -57,6 +60,8 @@ dependencies {
     // Compile time dependencies
     kapt(Libraries.lifecycleCompiler)
     kapt(Libraries.hiltCompiler)
+    kaptTest(Libraries.hiltCompiler)
+    kaptAndroidTest(Libraries.hiltCompiler)
     kapt(Libraries.roomCompiler)
 
     // Application dependencies
@@ -101,7 +106,9 @@ dependencies {
     testImplementation(TestLibraries.mockitoJUnitJupyter)
     testImplementation(TestLibraries.robolectric)
     testImplementation(TestLibraries.coreTesting)
-    debugImplementation(TestLibraries.fragmentTesting)
+    testImplementation(Libraries.hilt)
+    testImplementation(TestLibraries.hiltTesting)
+    testImplementation(TestLibraries.coreTestKtx)
 
     // Test Runtime
     testRuntimeOnly(TestRuntimeLibraries.jUnitJupyter)
@@ -113,7 +120,9 @@ dependencies {
     androidTestImplementation(TestLibraries.testRules)
     androidTestImplementation(TestLibraries.espressoIntents)
     androidTestImplementation(TestLibraries.hiltTesting)
+    androidTestImplementation(Libraries.hilt)
 
     // Development dependencies
+    debugImplementation(TestLibraries.fragmentTesting)
     debugImplementation(DevLibraries.leakCanary)
 }
