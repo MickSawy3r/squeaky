@@ -19,6 +19,7 @@ abstract class BaseViewModel : ViewModel() {
     val failure: LiveData<Failure> = _failure
 
     protected fun handleFailure(failure: Failure) {
+        _loading.value = false
         _failure.value = failure
     }
 

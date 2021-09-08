@@ -1,6 +1,6 @@
 package com.sixbits.assessment.feature.search.datasource.network
 
-import io.reactivex.rxjava3.core.Single
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -8,21 +8,21 @@ import retrofit2.http.Query
 
 interface ISpotifyApi {
     @GET("v1/search")
-    fun searchSpotify(
+    suspend fun searchSpotify(
         @Query("q") query: String,
         @Query("type") type: String = "track,artist",
         @Header("Authorization") authToken: String
-    ): Single<SearchResponse>
+    ): Call<SearchResponse>
 
     @GET("v1/artists/{id}")
-    fun getArtistDetails(
+    suspend fun getArtistDetails(
         @Path("id") id: String,
         @Header("Authorization") authToken: String
-    ): Single<ArtistDetailsResponse>
+    ): Call<ArtistDetailsResponse>
 
     @GET("v1/tracks/{id}")
-    fun getTrackDetails(
+    suspend fun getTrackDetails(
         @Path("id") id: String,
         @Header("Authorization") authToken: String
-    ): Single<TrackDetailsResponse>
+    ): Call<TrackDetailsResponse>
 }

@@ -3,13 +3,13 @@ package com.sixbits.assessment.feature.search.presentation
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.sixbits.assessment.feature.search.domain.datamodel.TrackDetailsDataModel
 import com.sixbits.assessment.feature.search.domain.failures.UnauthorizedException
 import com.sixbits.assessment.feature.search.domain.usecase.LoadTrackDetailsUseCase
 import com.sixbits.extention.Failure
 import com.sixbits.platform.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,23 +23,23 @@ class TrackDetailsViewModel @Inject constructor(
     fun loadDetails(id: String) {
         Log.d(TAG, "loadDetails: $id")
         setLoading(true)
-        loadTrackDetailsUseCase.execute(observer = DetailsObserver(), params = id)
+        loadTrackDetailsUseCase(id, viewModelScope) {
+            it.fold(::handleError, ::handleSuccess)
+        }
     }
 
-    private inner class DetailsObserver : DisposableSingleObserver<TrackDetailsDataModel>() {
-        override fun onSuccess(t: TrackDetailsDataModel) {
-            setLoading(false)
-            _detailsLiveDate.postValue(t)
-        }
+    private fun handleSuccess(track: TrackDetailsDataModel) {
+        setLoading(false)
+        _detailsLiveDate.postValue(track)
+    }
 
-        override fun onError(e: Throwable?) {
-            Log.d(TAG, "onError: $e")
-            setLoading(false)
-            if (e is UnauthorizedException) {
-                handleFailure(Failure.UnauthorizedError)
-            }
-            handleFailure(Failure.NetworkConnection)
+    private fun handleError(e: Failure) {
+        Log.d(TAG, "onError: $e")
+        setLoading(false)
+        if (e is UnauthorizedException) {
+            handleFailure(Failure.UnauthorizedError)
         }
+        handleFailure(Failure.NetworkConnection)
     }
 
     companion object {

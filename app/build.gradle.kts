@@ -51,7 +51,6 @@ android {
 
 dependencies {
     // Modules and Projects
-    implementation(project(":common:reactive"))
     implementation(project(":common:extension"))
     implementation(project(":common:platform"))
     implementation(project(":common:extension"))
@@ -66,7 +65,7 @@ dependencies {
 
     // Application dependencies
     implementation(Libraries.roomRuntime)
-    implementation(Libraries.roomRxAdapter)
+    implementation(Libraries.roomCoroutines)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.kotlinCoroutines)
     implementation(Libraries.kotlinCoroutinesAndroid)
@@ -85,13 +84,10 @@ dependencies {
     implementation(Libraries.hilt)
     implementation(Libraries.spotify)
     implementation(Libraries.retrofit)
-    implementation(Libraries.rxRetrofitAdapter)
     implementation(Libraries.moshiAdapter)
     implementation(Libraries.moshiKotlin)
     implementation(Libraries.okHttp)
     implementation(Libraries.okHttpLoggingInterceptor)
-    implementation(Libraries.rxAndroid)
-    implementation(Libraries.rxJava)
     implementation(Libraries.lottie)
     implementation(Libraries.fragmentKtx)
     implementation(Libraries.activityKtx)

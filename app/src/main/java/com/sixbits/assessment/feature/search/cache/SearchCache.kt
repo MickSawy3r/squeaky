@@ -2,16 +2,14 @@ package com.sixbits.assessment.feature.search.cache
 
 import com.sixbits.assessment.feature.search.datasource.local.CacheEntry
 import com.sixbits.assessment.feature.search.datasource.local.ISearchCache
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
 
 class SearchCache constructor(private val cacheDao: CacheDao) : ISearchCache {
-    override fun saveCache(cacheEntry: CacheEntry): Completable =
+    override suspend fun saveCache(cacheEntry: CacheEntry) =
         cacheDao.save(cacheEntry)
 
-    override fun saveCacheList(cacheEntry: List<CacheEntry>): Completable =
+    override suspend fun saveCacheList(cacheEntry: List<CacheEntry>) =
         cacheDao.saveMany(cacheEntry)
 
-    override fun getCachedRequests(): Single<List<CacheEntry>> =
+    override suspend fun getCachedRequests(): List<CacheEntry> =
         cacheDao.getCache()
 }

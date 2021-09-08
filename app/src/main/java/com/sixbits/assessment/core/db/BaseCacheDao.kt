@@ -4,20 +4,18 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Update
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
 
 interface BaseCacheDao<T> {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(data: T): Completable
+    fun save(data: T)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveMany(data: List<T>): Completable
+    fun saveMany(data: List<T>)
 
     @Delete
-    fun delete(data: T): Single<Int>
+    fun delete(data: T): Int
 
     @Update
-    fun set(data: T): Single<Int>
+    fun set(data: T): Int
 }

@@ -3,6 +3,7 @@ package com.sixbits.assessment.feature.search.presentation
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.sixbits.assessment.feature.search.domain.datamodel.SpotifyDataModel
 import com.sixbits.assessment.feature.search.domain.failures.UnauthorizedException
 import com.sixbits.assessment.feature.search.domain.usecase.GetLastSearchUseCase
@@ -10,7 +11,6 @@ import com.sixbits.assessment.feature.search.domain.usecase.SearchSpotifyUseCase
 import com.sixbits.extention.Failure
 import com.sixbits.platform.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,9 +28,9 @@ class SearchViewModel @Inject constructor(
 
     fun fetchCache() {
         setLoading(true)
-        getLastSearchUseCase.execute(
-            observer = SearchObserver()
-        )
+        getLastSearchUseCase(viewModelScope) {
+            it.fold(::onError, ::onSuccess)
+        }
     }
 
     fun searchFor(query: String) {
@@ -42,10 +42,9 @@ class SearchViewModel @Inject constructor(
         lastSearchQuery = query
         if (isConnected) {
             setLoading(true)
-            searchSpotifyUseCase.execute(
-                observer = SearchObserver(),
-                params = query
-            )
+            searchSpotifyUseCase(query, viewModelScope) {
+                it.fold(::onError, ::onSuccess)
+            }
         } else {
             hasQue = true
             setLoading(false)
@@ -61,21 +60,18 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private inner class SearchObserver : DisposableSingleObserver<List<SpotifyDataModel>>() {
+    private fun onSuccess(t: List<SpotifyDataModel>) {
+        _searchLiveData.postValue(t)
+        setLoading(false)
+    }
 
-        override fun onError(e: Throwable) {
-            Log.d(TAG, "onError: $e at \n${e.stackTrace}")
-            setLoading(false)
-            if (e is UnauthorizedException) {
-                handleFailure(Failure.UnauthorizedError)
-            } else {
-                handleFailure(Failure.NetworkConnection)
-            }
-        }
-
-        override fun onSuccess(t: List<SpotifyDataModel>?) {
-            _searchLiveData.postValue(t)
-            setLoading(false)
+    private fun onError(e: Throwable) {
+        Log.d(TAG, "onError: $e at \n${e.stackTrace}")
+        setLoading(false)
+        if (e is UnauthorizedException) {
+            handleFailure(Failure.UnauthorizedError)
+        } else {
+            handleFailure(Failure.NetworkConnection)
         }
     }
 

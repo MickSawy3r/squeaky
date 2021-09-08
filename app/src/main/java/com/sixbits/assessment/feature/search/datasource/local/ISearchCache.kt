@@ -1,12 +1,9 @@
 package com.sixbits.assessment.feature.search.datasource.local
 
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
-
 interface ISearchCache {
-    fun saveCache(cacheEntry: CacheEntry): Completable
+    suspend fun saveCache(cacheEntry: CacheEntry)
 
-    fun saveCacheList(cacheEntry: List<CacheEntry>): Completable
+    suspend fun saveCacheList(cacheEntry: List<CacheEntry>)
 
-    fun getCachedRequests(): Single<List<CacheEntry>>
+    suspend fun getCachedRequests(): List<CacheEntry>
 }

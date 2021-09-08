@@ -17,7 +17,6 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/common/extension" />
             <option value="$PROJECT_DIR$/common/platform" />
-            <option value="$PROJECT_DIR$/common/reactive" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

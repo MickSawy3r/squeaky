@@ -83,6 +83,7 @@ object Libraries {
     const val roomAnnotationProcessor = "androidx.room:room-compiler:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     const val roomRxAdapter = "androidx.room:room-rxjava3:${Versions.room}"
+    const val roomCoroutines = "androidx.room:room-ktx:${Versions.room}"
 
     const val activityKtx = "androidx.activity:activity-ktx:${Versions.activityKtx}"
 
