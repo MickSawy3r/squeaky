@@ -2,6 +2,8 @@ package com.sixbits.assessment.feature.search.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sixbits.assessment.core.navigation.Navigator
 import com.sixbits.assessment.databinding.ItemSearchBinding
@@ -10,11 +12,8 @@ import com.sixbits.extention.loadCircularFromUrl
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class SearchAdapter @Inject constructor() : RecyclerView.Adapter<SearchAdapter.SearchVH>() {
-
-    internal var collection: List<SpotifyDataModel> by Delegates.observable(emptyList()) { _, _, _ ->
-        notifyDataSetChanged()
-    }
+class SearchAdapter @Inject constructor() :
+    ListAdapter<SpotifyDataModel, SearchAdapter.SearchVH>(DIFF_UTILS) {
 
     internal var clickListener: (SpotifyDataModel, Navigator.Extras) -> Unit = { _, _ -> }
 
@@ -25,10 +24,10 @@ class SearchAdapter @Inject constructor() : RecyclerView.Adapter<SearchAdapter.S
     }
 
     override fun onBindViewHolder(viewHolder: SearchVH, position: Int) {
-        viewHolder.bind(collection[position], clickListener)
+        viewHolder.bind(currentList[position], clickListener)
     }
 
-    override fun getItemCount(): Int = collection.size
+    override fun getItemCount(): Int = currentList.size
 
     class SearchVH(private val itemRow: ItemSearchBinding) :
         RecyclerView.ViewHolder(itemRow.root) {
@@ -45,5 +44,26 @@ class SearchAdapter @Inject constructor() : RecyclerView.Adapter<SearchAdapter.S
                 )
             }
         }
+    }
+
+    class SearchItemDiffUtils : DiffUtil.ItemCallback<SpotifyDataModel>() {
+        override fun areItemsTheSame(
+            oldItem: SpotifyDataModel,
+            newItem: SpotifyDataModel
+        ): Boolean {
+            return oldItem.name == newItem.name && newItem.type == oldItem.type
+        }
+
+        override fun areContentsTheSame(
+            oldItem: SpotifyDataModel,
+            newItem: SpotifyDataModel
+        ): Boolean {
+            return oldItem.name == newItem.name &&
+                    oldItem.image == oldItem.image
+        }
+    }
+
+    companion object {
+        private val DIFF_UTILS = SearchItemDiffUtils()
     }
 }

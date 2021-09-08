@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.sixbits.assessment.R
 import com.sixbits.assessment.core.navigation.Navigator
@@ -36,14 +37,13 @@ class SearchFragment : BaseFragment(), ConnectivityCallback {
     @Inject
     lateinit var searchAdapter: SearchAdapter
 
-    private lateinit var searchViewModel: SearchViewModel
+    private val searchViewModel: SearchViewModel by viewModels()
     private lateinit var uiBinding: FragmentSearchBinding
     private lateinit var connectivityBroadcastReceiver: ConnectivityBroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         connectivityBroadcastReceiver = ConnectivityBroadcastReceiver(this)
 
         with(searchViewModel) {
@@ -116,7 +116,7 @@ class SearchFragment : BaseFragment(), ConnectivityCallback {
         uiBinding.recycler.visibility = View.VISIBLE
         uiBinding.llNoInternet.visibility = View.GONE
 
-        searchAdapter.collection = data.orEmpty()
+        searchAdapter.submitList(data.orEmpty())
 
         val result = data.orEmpty()
 
@@ -148,10 +148,5 @@ class SearchFragment : BaseFragment(), ConnectivityCallback {
                 notify(R.string.failure_server_error)
             }
         }
-    }
-
-    @VisibleForTesting
-    fun injectViewModel(testViewModel: SearchViewModel) {
-        searchViewModel = testViewModel
     }
 }
