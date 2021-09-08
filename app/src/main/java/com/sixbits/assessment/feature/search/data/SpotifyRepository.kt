@@ -29,7 +29,7 @@ class SpotifyRepository @Inject constructor(
     private val searchListMapper: SearchResponseMapper,
     private val trackDetailsResponseMapper: TrackDetailsResponseMapper
 ) {
-    suspend fun search(query: String, token: String): Either<Failure, List<SpotifyDataModel>> {
+    fun search(query: String, token: String): Either<Failure, List<SpotifyDataModel>> {
         return requestCall(
             spotifyService.search(query, token),
             {
